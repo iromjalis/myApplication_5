@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">myApplication_5</string>
+    <string name="creations">creations</string>
+    <string name="resetBtn">reset</string>
+    <string name="HitMeBtn">Hit me!</string>
+    <string name="hitCounter">hit counter</string>
+    <string name="visible">visible</string>
+</resources>
