@@ -1,4 +1,4 @@
-package com.vpn.task;
+package fi.irinaromjalis.myapplication_5;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.vpn.task", appContext.getPackageName());
+        assertEquals("fi.irinaromjalis.myapplication_5", appContext.getPackageName());
     }
 }

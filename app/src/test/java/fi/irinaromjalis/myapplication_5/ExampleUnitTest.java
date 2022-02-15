@@ -1,4 +1,4 @@
-package com.vpn.task;
+package fi.irinaromjalis.myapplication_5;
 
 import org.junit.Test;
 

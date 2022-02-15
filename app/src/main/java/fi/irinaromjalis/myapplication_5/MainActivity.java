@@ -8,12 +8,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 public class MainActivity extends AppCompatActivity {
-
-    int creationsValue, valueIncrement, hitValue, hitIncrement;
+    public int creationsValue, valueIncrement, hitValue, hitIncrement;
     Button hitMe;
-    TextView reset, hitCounter, visible, creations;
+    TextView reset;
+    TextView hitCounter, visible, creations;
     Counter count = new Counter(0, 50, 0, 1);
 
     String TAG = "TAG";
@@ -24,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("Shared", MODE_PRIVATE);
 
-        Log.d(TAG, "onCreate: ");
+        Log.d(TAG, "onCreate method: ");
 
         reset = findViewById(R.id.resetBtn);
 
@@ -43,66 +42,67 @@ public class MainActivity extends AppCompatActivity {
         String res = Integer.toString(valueIncrement);
         creations.setText(res);
 
-        hitValue = Integer.parseInt(hitCounter.getText().toString());
-        hitIncrement = count.increment(hitValue);
+        hitIncrement = count.increment(Integer.parseInt(hitCounter.getText().toString()));
         String hitRes = Integer.toString(hitIncrement);
-//        hitCounter.setText(hitRes);
 
         hitMe.setOnClickListener(view -> hitCounter.setText(hitRes));
 
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String res = Integer.toString(count.reset());
+                int value = count.reset();
+                String resetValue = Integer.toString(value);
 
-                Log.i(TAG, res );
-                hitCounter.setText(res);
-                visible.setText(res);
-                creations.setText(res);
+                hitCounter.setText(resetValue);
+                visible.setText(resetValue);
+                creations.setText(resetValue);
             }
         });
     }
+
     @Override
     protected void onStart() {
-        Log.d(TAG, "onStart: ");
-
-        int visibleValue=Integer.parseInt((visible.getText().toString())+"");
-        visible.setText(count.increment(visibleValue));
+        Log.d(TAG, "onStart method: ");
+        int startValue = count.increment(Integer.parseInt(visible.getText().toString()));
+        String stringValue = Integer.toString(startValue);
+        visible.setText(stringValue);
         super.onStart();
-    }
-    @Override
-    protected void onResume() {
-        Log.d(TAG, "onResume: ");
-        super.onResume();
     }
 
     @Override
     protected void onPause() {
-        Log.d(TAG, "onPause: ");
-        //Save info
-        SharedPreferences.Editor editor = getSharedPreferences("Shared", MODE_PRIVATE).edit();
+        Log.d(TAG, "onPause method: ");
 
-        editor.putString("hit", hitCounter.getText().toString());
-        editor.putString("visible", visible.getText().toString());
+        SharedPreferences.Editor editor = getSharedPreferences("Shared", MODE_PRIVATE).edit();
         editor.putString("creations", creations.getText().toString());
+        editor.putString("visible", visible.getText().toString());
+        editor.putString("hit", hitCounter.getText().toString());
 
         editor.apply();
         super.onPause();
     }
-    //fir log in LogCat
+
+    @Override
+    protected void onResume() {
+        Log.d(TAG, "onResume method: ");
+        super.onResume();
+    }
+
     @Override
     protected void onStop() {
-        Log.d(TAG, "onStop: ");
+        Log.d(TAG, "onStop method: ");
         super.onStop();
     }
-    @Override
-    protected void onRestart() {
-        Log.d(TAG, "onRestart: ");
-        super.onRestart();
-    }
+
     @Override
     protected void onDestroy() {
-        Log.d(TAG, "onDestroy: ");
+        Log.d(TAG, "onDestroy method: ");
         super.onDestroy();
+    }
+
+    @Override
+    protected void onRestart() {
+        Log.d(TAG, "onRestart method: ");
+        super.onRestart();
     }
 }

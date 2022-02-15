@@ -13,14 +13,22 @@ public class Counter {
         this.start = start;
         this.step = step;
     }
-
-    // plus
     public int increment (int value){
         int newValue = value + step;
         if (newValue >= max) {
 
             return max;
         }
+        value = newValue;
+        return value;
+    }
+
+    public int decrement (int value){
+        int newValue = value - step;
+        if (newValue <= min) {
+            return min;
+        }
+
         value = newValue;
         return value;
     }
